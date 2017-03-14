@@ -20,6 +20,8 @@
 <h2>
 <b>Send SmS</b>
 </h2>
+
+
 <ul>
 
 		<li>Enter Numbers to send sms to</li>
@@ -30,7 +32,7 @@
 		E.g
 		<code>I am sending Happy message</code>
 
-		<li>Enter your Sender Name/li>
+		<li>Enter your Sender Name</li>
 
 		E.g
 		<code>MTN AWUF</code>
