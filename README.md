@@ -1,4 +1,3 @@
-# http_clients
 <h1>Sending Sms Using Command Line</h1>
 <h3>To Install this App follow the instructions below:</h3>
 <ul>
@@ -26,14 +25,14 @@
 
 		<li>Enter Numbers to send sms to</li>
 		E.g
-		<code>2347032776995,2347034471683</code>
+		2347032776995,2347034471683
 		<i>You can send to multiple users</i>
 		<li>Enter your message Message</li>
 		E.g
-		<code>I am sending Happy message</code>
+		I am sending Happy message
 
 		<li>Enter your Sender Name</li>
 
 		E.g
-		<code>MTN AWUF</code>
+		MTN AWUF
 	</ul>
