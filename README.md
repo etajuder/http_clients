@@ -17,7 +17,8 @@
 
 
 </p>
-<h2><b>Send SmS</b></h2>
+<h2>
+<b>Send SmS</b></h2>
 
 	<ul>
 		<li>Enter Numbers to send sms to</li>
