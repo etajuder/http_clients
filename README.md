@@ -18,9 +18,10 @@
 
 </p>
 <h2>
-<b>Send SmS</b></h2>
+<b>Send SmS</b>
+</h2>
+<ul>
 
-	<ul>
 		<li>Enter Numbers to send sms to</li>
 		E.g
 		<code>2347032776995,2347034471683</code>
