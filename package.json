@@ -1,0 +1,34 @@
+{
+  "name": "http_clients",
+  "version": "1.0.0",
+  "description": "using  command line make API calls ",
+  "main": "app/index.js",
+  "bin": {
+    "snippet": "./app/index.js"
+  },
+  "scripts": {
+    "test": "jasmine tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wapjude/http_clients.git"
+  },
+  "keywords": [
+    "http_client",
+    "API",
+    "calls",
+    "Andela"
+  ],
+  "author": "Etanuwoma jude",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wapjude/http_clients/issues"
+  },
+  "homepage": "https://github.com/wapjude/http_clients#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "clui": "^0.3.1",
+    "http-client": "^4.3.1",
+    "request": "^2.81.0"
+  }
+}
