@@ -15,11 +15,12 @@
 	1: Check you Sms Balance
 	2: Send Sms
 
-	<h2><b>Send SmS</b></h2>
+	
+</p>
+<h2><b>Send SmS</b></h2>
 	<ul>
 		<li>Enter Numbers to send sms to</li>
 		E.g
 		<code>2347032776995,2347034471683</code>
 		<i>You can send to multiple users</i>>
 	</ul>
-</p>
