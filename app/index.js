@@ -4,37 +4,22 @@
 
  const chalk = require('chalk');
 
- var Spinner     = require('clui').Spinner;
+ var Spinner = require('clui').Spinner;
 
  var request = require('request');
+ var app = new App();
 
-if (!String.prototype.format) {
-
-            String.prototype.format = function() {
-
-    		var args = arguments;
-
-    		return this.replace(/{(\d+)}/g, function(match, number) { 
-
-     		 return typeof args[number] != 'undefined' ? args[number]: match
-
-              ;
-
-    		});
-
-  };
-
-}
 
  	prompt.start();
 
-	console.log(chalk.blue("Welcome to Multiple Sms Sender here you can send SMS to Many users using this wonderful command line App"));
+	
+    app.display_message([chalk.blue("Welcome to Multiple Sms Sender here you can send SMS to Many users using this wonderful command line App"),
+                       chalk.green("Please Select your Operation"),
+                       chalk.yellow("1: Check your Account Balance"),
+                       chalk.cyan("2: Send Sms")
+                    ]);
 
-	console.log(chalk.green("Please Select your Operation"));
-
-	console.log(chalk.yellow("1: Check your Account Balance"));
-
-	console.log(chalk.cyan("2: Send Sms"));
+	  
 
 	prompt.get(["operation"],function(err,result){
 
@@ -42,68 +27,63 @@ if (!String.prototype.format) {
 
     				case "1":
 
-        			 var status = new Spinner('Getting your SMS Account Balance, please wait...');
+                app.initiate_request("'Getting your SMS Account Balance, please wait...'");
 
-         			  status.start();
+          			
+          			 var url = "http://smsmobile24.com/components/com_spc/smsapi.php?username={0}&password={1}&balance=true&".format(app.username,app.password);
 
-          			  var username = "wapjuder";
-
-           			 var password = "password";
-
-          			 var url = "http://smsmobile24.com/components/com_spc/smsapi.php?username={0}&password={1}&balance=true&".format(username,password);
 
           			 request(url,function(error, response, body){
 
+                  app.stop_request();
 
-           			if(response.statusCode === 200){
+           					if(response.statusCode === 200){
 
-           						status.stop();
-
-           						console.log(chalk.green("Your Account Balance is "+body))
+           								app.display_message(chalk.green("Your Account Balance is "+body));
+           								
            		
-           			}else{
+           					}else{
 
-           						console.log(chalk.red("Error occur please try again"));
-           			}
-           });
+                          app.display_message(chalk.red("Error occur please try again"));
+           								
+           					}
+
+                   });
 
 
     	break;
 
-    	case "2":
+    	 	case "2":
     	
-    				console.log(chalk.white("Please Enter the numbers to send to."));
-    	
-    				console.log(chalk.white("Enter the message to be sent"));
+    				
+            app.display_message([chalk.white("Please Enter the numbers to send to."),
+                             chalk.white("Enter the message to be sent"),
+                             chalk.white("Enter the Sender Name")
+              ]);
 
-    				console.log(chalk.white("Enter the Sender Name"));
- 
     	
     				prompt.get(["numbers","message","sender"],function(err,result){
 
-    				var username = "wapjuder";
-
-            		var password = "password";
-
     				var url = "http://smsmobile24.com/components/com_spc/smsapi.php?username={0}&password={1}&sender={2}&recipient={3}&message={4}";
 
-    				url =url.format(username,password,result.sender,result.numbers,result.message);
+    				    url = url.format(app.username,app.password,result.sender,result.numbers,result.message);
 
-           			var status = new Spinner('Sending Message to '+ result.numbers);
 
-           			status.start();
+           			app.initiate_request('Sending Message to '+ result.numbers);
 
+           			
     				request(url,function(error, response, body){
+
+                    app.stop_request();
 
     						if(response.statusCode === 200){
 
-    									status.stop();
-
-    									console.log(chalk.green("Your Message have been sent to "+request.numbers));
+    									
+    									app.display_message(chalk.green("Your Message have been sent to "+request.numbers));
 
     						}else{
 
-    									console.log(chalk.red("Error Sending message"));
+    									app.display_message(chalk.red("Error Sending message"));
 
     						}
     				});
@@ -119,3 +99,69 @@ if (!String.prototype.format) {
     	break;
     }
 });
+
+
+
+  function App(){
+
+    this.username = "wapjuder";
+    this.password = "password";    
+    this.request_sms_url = "http://smsmobile24.com/components/com_spc/smsapi.php?username={0}&password={1}&balance=true&";
+    this.message = "";
+    this.numbers = "";
+    this.sender = "Andela";
+    this.sms_url = "http://smsmobile24.com/components/com_spc/smsapi.php?username={0}&password={1}&sender={2}&recipient={3}&message={4}";
+    this.spinner = new Spinner("");
+
+    this.display_message = function(message){
+                              if(Array.isArray(message)){
+
+                              message.forEach(function(mess){
+                                 console.log(mess);
+                              });
+
+
+                              }else{
+
+                                 console.log(message);
+                              
+                              }
+                         
+                          }
+
+    this.initiate_request = function(request_message){
+
+                            this.spinner.message(request_message);
+
+                            this.spinner.start();
+
+                          }
+
+  this.stop_request    = function(){
+
+                           this.spinner.stop();  
+                         }
+  }
+
+  
+
+
+     //define string format prototype
+if (!String.prototype.format) {
+
+            String.prototype.format = function() {
+
+        var args = arguments;
+
+        return this.replace(/{(\d+)}/g, function(match, number) { 
+
+         return typeof args[number] != 'undefined' ? args[number]: match
+
+              ;
+
+        });
+
+  };
+
+}
+  
